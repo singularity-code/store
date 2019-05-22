@@ -1,14 +1,17 @@
 <?php
 //connect to database
-$mysqli = mysqli_connect("localhost", "root", "", "mallDB");
-
+$mysqli = new mysqli('localhost', 'root', 'secret', 'store');
+if ($mysqli->connect_errno) {
+    die('Connection Error ('.$mysqli->connect_errno.'): '.
+    $mysqli->connect_error);
+}
+ 
 $display_block = "<h1>My Categories</h1>
 <p>Select a category to see its items.</p>";
 
 //show categories first
 $get_cats_sql = "SELECT id, cat_title, cat_desc FROM store_categories ORDER BY cat_title";
-$get_cats_res =  mysqli_query($mysqli, $get_cats_sql)
-                 or die(mysqli_error($mysqli));
+$get_cats_res =  mysqli_query($mysqli, $get_cats_sql) or die(mysqli_error($mysqli));
 
 if (mysqli_num_rows($get_cats_res) < 1) {
     $display_block = "<p><em>Sorry, no categories to browse.</em></p>";
@@ -54,7 +57,6 @@ if (mysqli_num_rows($get_cats_res) < 1) {
             }
         }  
     }
-
 //free results
 mysqli_free_result($get_cats_res);
 //close connection to MySQL

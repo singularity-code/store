@@ -2,7 +2,11 @@
 session_start();
 
 //connect to database
-$mysqli = mysqli_connect("localhost", "root", "", "mallDB");
+$mysqli = new mysqli('localhost', 'root', 'secret', 'store');
+if ($mysqli->connect_errno) {
+    die('Connection Error ('.$mysqli->connect_errno.'): '.
+    $mysqli->connect_error);
+}
 
 $display_block = "<h1>Your Shopping Cart</h1>";
 
