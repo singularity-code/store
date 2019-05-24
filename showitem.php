@@ -41,7 +41,9 @@ if (mysqli_num_rows($get_item_res) < 1) {
     }
 
     //make breadcrumb trail & display of item
-    $display_block .= <<<END_OF_TEXT
+    $display_block .= 
+    
+<<<END_OF_TEXT
     <p><em>You are viewing:</em><br/>
     <strong><a href="seestore.php?cat_id=$cat_id">$cat_title</a> &gt; $item_title</strong></p>
     <div style="float: left;"><img src="$item_image" alt="$item_title"/></div>
@@ -99,15 +101,17 @@ END_OF_TEXT;
     //free result
     mysqli_free_result($get_sizes_res);
 
-    $display_block .= "
-    <p><label for=\"sel_item_qty\">Select Quantity:</label>
+    $display_block .= 
+    "<p><label for=\"sel_item_qty\">Select Quantity</label>
     <select id=\"sel_item_qty\" name=\"sel_item_qty\">";
     
     for($i=1; $i<11; $i++) {
         $display_block .= "<option value=\"".$i."\">".$i."</option>";
     }
     
-    $display_block .= <<<END_OF_TEXT
+    $display_block .= 
+
+<<<END_OF_TEXT
     </select></p>
     <input type="hidden" name="sel_item_id" value="$_GET[item_id]" />
     <button type="submit" name="submit" value="submit">

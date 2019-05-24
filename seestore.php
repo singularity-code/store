@@ -1,6 +1,6 @@
 <?php
 //connect to database
-$mysqli = mysqli_connect("localhost", "root", "", "mallDB");
+$mysqli = mysqli_connect("localhost", "root", "secret", "store");
 
 $display_block = "<h1>My Categories</h1>
 <p>Select a category to see its items.</p>";

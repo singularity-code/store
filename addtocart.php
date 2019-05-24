@@ -3,7 +3,7 @@ session_start();
 
 if (isset($_POST['sel_item_id'])) {
     //connect to database
-    $mysqli = mysqli_connect("localhost", "root", "", "mallDB");
+    $mysqli = mysqli_connect("localhost", "root", "secret", "store");
 
     //create safe values for use
     $safe_sel_item_id = mysqli_real_escape_string($mysqli,

@@ -42,7 +42,7 @@ INSERT INTO store_items VALUES ('3', '1', 'Top Hat', '102.00', 'Good for costume
 INSERT INTO store_items VALUES ('4', '2', 'Short-Sleeved T-Shirt', '12.00', '100% cotton, pre-shrunk.', 'sstshirt.gif');
 INSERT INTO store_items VALUES ('5', '2', 'Long-Sleeved T-Shirt', '15.00', 'Just like the short-sleeved shirt, with longer sleeves.', 'lstshirt.gif');
 INSERT INTO store_items VALUES ('6', '2', 'Sweatshirt', '22.00', 'Heavy and warm.', 'sweatshirt.gif');
-INSERT INTO store_items VALUES ('7', '3', 'Jane\'s Self-Help Book', '12.00', 'Jane gives advice.', 'selfhelpbook.gif');
+INSERT INTO store_items VALUES ('7', '3', 'Jane Self-Help Book', '12.00', 'Jane gives advice.', 'selfhelpbook.gif');
 INSERT INTO store_items VALUES ('8', '3', 'Generic Academic Book', '35.00', 'Some required reading for school, will put you to sleep.', 'boringbook.gif');
 INSERT INTO store_items VALUES ('9', '3', 'Chicago Manual of Style', '9.99', 'Good for copywriters.', 'chicagostyle.gif');
 
@@ -95,3 +95,88 @@ CREATE TABLE store_orders_items (
 	, sel_item_price FLOAT(6,2) 
 );
 	
+--Chapter 3
+CREATE TABLE master_name (
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+	,date_added DATETIME
+	,date_modified DATETIME
+	,f_name VARCHAR (75)
+	,l_name VARCHAR (75)
+);
+
+CREATE TABLE address (
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+	,master_id INT NOT NULL
+	,date_added DATETIME
+	,date_modified DATETIME
+	,address VARCHAR (255)
+	,city VARCHAR (30)
+	,state CHAR (2)
+	,zipcode VARCHAR (10)
+	,type ENUM ('home', 'work', 'other'));
+	
+CREATE TABLE telephone (
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+	,master_id INT NOT NULL
+	,date_added DATETIME
+	,date_modified DATETIME
+	,tel_number VARCHAR (25)
+	,type ENUM ('home', 'work', 'other'));
+	
+CREATE TABLE fax (
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+	,master_id INT NOT NULL
+	,date_added DATETIME
+	,date_modified DATETIME
+	,fax_number VARCHAR (25)
+	,type ENUM ('home', 'work', 'other'));
+
+CREATE TABLE email (
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+	,master_id INT NOT NULL
+	,date_added DATETIME
+	,date_modified DATETIME
+	,email VARCHAR (150)
+	,type ENUM ('home', 'work', 'other'));
+
+CREATE TABLE personal_notes (
+	id int NOT NULL PRIMARY KEY AUTO_INCREMENT
+	,master_id INT NOT NULL UNIQUE
+	,date_added DATETIME
+	,date_modified DATETIME,note TEXT);
+
+-- Task1
+
+CREATE TABLE store_item_stock (
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+	, stock_item_id INT
+	, stock_item_qty INT
+	, stock_sold_qty INT
+	, item_color_id INT
+	, item_size_id INT
+)
+
+INSERT INTO store_item_stock VALUES (1, 1, 40, 0, 1, null);
+INSERT INTO store_item_stock VALUES (2, 1, 20, 0, 2, null);
+INSERT INTO store_item_stock VALUES (3, 1, 50, 0, 3, null);
+INSERT INTO store_item_stock VALUES (4, 2, 30, 0, 1, null);
+INSERT INTO store_item_stock VALUES (5, 2, 50, 0, 2, null);
+INSERT INTO store_item_stock VALUES (6, 2, 50, 0, 3, null);
+INSERT INTO store_item_stock VALUES (7, 3, 30, 0, 1, null);
+INSERT INTO store_item_stock VALUES (8, 3, 50, 0, 2, null);
+INSERT INTO store_item_stock VALUES (9, 3, 90, 0, 3, null);
+INSERT INTO store_item_stock VALUES (10, 4, 30, 0, null, 4);
+INSERT INTO store_item_stock VALUES (11, 4, 20, 0, null, 5);
+INSERT INTO store_item_stock VALUES (12, 4, 50, 0, null, 6);
+INSERT INTO store_item_stock VALUES (13, 4, 40, 0, null, 7);
+INSERT INTO store_item_stock VALUES (14, 5, 50, 0, null, 4);
+INSERT INTO store_item_stock VALUES (15, 5, 80, 0, null, 5);
+INSERT INTO store_item_stock VALUES (16, 5, 50, 0, null, 6);
+INSERT INTO store_item_stock VALUES (17, 5, 30, 0, null, 7);
+INSERT INTO store_item_stock VALUES (18, 6, 50, 0, null, 4);
+INSERT INTO store_item_stock VALUES (19, 6, 60, 0, null, 5);
+INSERT INTO store_item_stock VALUES (20, 6, 20, 0, null, 6);
+INSERT INTO store_item_stock VALUES (21, 6, 50, 0, null, 7);
+INSERT INTO store_item_stock VALUES (22, 7, 100, 0, null, null);
+INSERT INTO store_item_stock VALUES (23, 8, 100, 0, null, null);
+INSERT INTO store_item_stock VALUES (24, 9, 100, 0, null, null);
