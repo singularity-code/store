@@ -75,14 +75,14 @@ CREATE TABLE store_orders (
 	, order_name VARCHAR (100)
 	, order_address VARCHAR (255)
 	, order_city VARCHAR (50)
-	, order_state CHAR(2)
+	, order_state CHAR(3)
 	, order_zip VARCHAR(10)
 	, order_tel VARCHAR(25)
 	, order_email VARCHAR(100)
 	, item_total FLOAT(6,2)
 	, shipping_total FLOAT(6,2)
 	, authorization VARCHAR (50)
-	, status ENUM('processed', 'pending') 
+	, order_status VARCHAR(50)
 );
 
 CREATE TABLE store_orders_items (
@@ -151,32 +151,75 @@ CREATE TABLE store_item_stock (
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
 	, stock_item_id INT
 	, stock_item_qty INT
-	, stock_sold_qty INT
-	, item_color_id INT
-	, item_size_id INT
+	, item_color_id VARCHAR(10)
+	, item_size_id VARCHAR(10)
 )
 
-INSERT INTO store_item_stock VALUES (1, 1, 40, 0, 1, null);
-INSERT INTO store_item_stock VALUES (2, 1, 20, 0, 2, null);
-INSERT INTO store_item_stock VALUES (3, 1, 50, 0, 3, null);
-INSERT INTO store_item_stock VALUES (4, 2, 30, 0, 1, null);
-INSERT INTO store_item_stock VALUES (5, 2, 50, 0, 2, null);
-INSERT INTO store_item_stock VALUES (6, 2, 50, 0, 3, null);
-INSERT INTO store_item_stock VALUES (7, 3, 30, 0, 1, null);
-INSERT INTO store_item_stock VALUES (8, 3, 50, 0, 2, null);
-INSERT INTO store_item_stock VALUES (9, 3, 90, 0, 3, null);
-INSERT INTO store_item_stock VALUES (10, 4, 30, 0, null, 4);
-INSERT INTO store_item_stock VALUES (11, 4, 20, 0, null, 5);
-INSERT INTO store_item_stock VALUES (12, 4, 50, 0, null, 6);
-INSERT INTO store_item_stock VALUES (13, 4, 40, 0, null, 7);
-INSERT INTO store_item_stock VALUES (14, 5, 50, 0, null, 4);
-INSERT INTO store_item_stock VALUES (15, 5, 80, 0, null, 5);
-INSERT INTO store_item_stock VALUES (16, 5, 50, 0, null, 6);
-INSERT INTO store_item_stock VALUES (17, 5, 30, 0, null, 7);
-INSERT INTO store_item_stock VALUES (18, 6, 50, 0, null, 4);
-INSERT INTO store_item_stock VALUES (19, 6, 60, 0, null, 5);
-INSERT INTO store_item_stock VALUES (20, 6, 20, 0, null, 6);
-INSERT INTO store_item_stock VALUES (21, 6, 50, 0, null, 7);
-INSERT INTO store_item_stock VALUES (22, 7, 100, 0, null, null);
-INSERT INTO store_item_stock VALUES (23, 8, 100, 0, null, null);
-INSERT INTO store_item_stock VALUES (24, 9, 100, 0, null, null);
+INSERT INTO store_item_stock VALUES (1, 1, 40, 1, "");
+INSERT INTO store_item_stock VALUES (2, 1, 20, 2, "");
+INSERT INTO store_item_stock VALUES (3, 1, 50, 3, "");
+INSERT INTO store_item_stock VALUES (4, 2, 30, 1, "");
+INSERT INTO store_item_stock VALUES (5, 2, 50, 2, "");
+INSERT INTO store_item_stock VALUES (6, 2, 50, 3, "");
+INSERT INTO store_item_stock VALUES (7, 3, 30, 1, "");
+INSERT INTO store_item_stock VALUES (8, 3, 50, 2, "");
+INSERT INTO store_item_stock VALUES (9, 3, 90, 3, "");
+INSERT INTO store_item_stock VALUES (10, 4, 30, "", 4);
+INSERT INTO store_item_stock VALUES (11, 4, 20, "", 5);
+INSERT INTO store_item_stock VALUES (12, 4, 50, "", 6);
+INSERT INTO store_item_stock VALUES (13, 4, 40, "", 7);
+INSERT INTO store_item_stock VALUES (14, 5, 50, "", 4);
+INSERT INTO store_item_stock VALUES (15, 5, 80, "", 5);
+INSERT INTO store_item_stock VALUES (16, 5, 50, "", 6);
+INSERT INTO store_item_stock VALUES (17, 5, 30, "", 7);
+INSERT INTO store_item_stock VALUES (18, 6, 50, "", 4);
+INSERT INTO store_item_stock VALUES (19, 6, 60, "", 5);
+INSERT INTO store_item_stock VALUES (20, 6, 20, "", 6);
+INSERT INTO store_item_stock VALUES (21, 6, 50, "", 7);
+INSERT INTO store_item_stock VALUES (22, 7, 100, "", "");
+INSERT INTO store_item_stock VALUES (23, 8, 100, "", "");
+INSERT INTO store_item_stock VALUES (24, 9, 100, "", "");
+
+DROP TABLE `store_orders`;
+DROP TABLE `address`;
+CREATE TABLE store_orders ( 
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+	, order_date DATETIME
+	, order_name VARCHAR (100)
+	, order_address VARCHAR (255)
+	, order_city VARCHAR (50)
+	, order_state VARCHAR(50)
+	, order_zip VARCHAR(4)
+	, order_tel VARCHAR(25)
+	, order_email VARCHAR(100)
+	, item_total FLOAT(6,2)
+	, shipping_total FLOAT(6,2)
+	, authorization VARCHAR (50)
+	, order_status VARCHAR(50)
+	, order_note VARCHAR(255)
+);
+CREATE TABLE address (
+	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT
+	,master_id INT NOT NULL
+	,date_added DATETIME
+	,date_modified DATETIME
+	,address VARCHAR (255)
+	,city VARCHAR (30)
+	,state VARCHAR(3)
+	,zipcode VARCHAR (10)
+	,type ENUM ('home', 'work', 'other'));
+INSERT INTO store_orders
+SET
+	order_date = '2019-05-25 23:50:33'
+	,order_name = 'a'
+	,order_address = 'add'
+	,order_city = 'city'
+	,order_state = 'NT'
+	,order_zip = '2000'
+	,order_tel = '2349023'
+	,order_email = 'email@gmail.com'
+	,item_total = 10.00
+	,shipping_total = 10.00
+	,authorization = 'test'
+	,order_status = 'Processing'
+	,order_note = 'note test';
